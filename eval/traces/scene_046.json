@@ -1,0 +1,215 @@
+{
+ "run_id": "31871e5f0cc9",
+ "outcome": "escalate",
+ "summary": "Found 1 hazard(s): cable (high). High-severity items are waiting for human approval.",
+ "planners": [
+  "rule"
+ ],
+ "opencv_version": "5.0.0",
+ "quality": {
+  "mean_luminance": 21.87,
+  "contrast": 2.89,
+  "sharpness": 51.7,
+  "glare_fraction": 0.0,
+  "issues": [
+   "dark",
+   "low_contrast"
+  ],
+  "verdict": "enhance"
+ },
+ "post_quality": {
+  "mean_luminance": 140.71,
+  "contrast": 6.0,
+  "sharpness": 48.73,
+  "glare_fraction": 0.0,
+  "issues": [],
+  "verdict": "ok"
+ },
+ "enhanced": true,
+ "detections": [
+  {
+   "id": "h1",
+   "type": "cable",
+   "bbox": [
+    361,
+    0,
+    180,
+    107
+   ],
+   "area_fraction": 0.0068,
+   "confidence": 0.269,
+   "in_walk_path": true,
+   "status": "confirmed",
+   "severity": "high",
+   "inspection": {
+    "confirmed": true,
+    "reason": "local_object_evidence",
+    "confidence": 0.936,
+    "object_fraction": 0.119,
+    "mean_delta_L": -54.8,
+    "edge_strength": 156.2,
+    "chroma_ref": 2.8,
+    "chroma_region": 1.3,
+    "hue_shift_deg": 1.2,
+    "hough_segments": 10,
+    "zoom": 2.0
+   }
+  }
+ ],
+ "actions": [
+  {
+   "kind": "approval",
+   "id": "AP-1E504B",
+   "hazard_ids": [
+    "h1"
+   ]
+  }
+ ],
+ "trace": [
+  {
+   "i": 1,
+   "planner": "rule",
+   "tool": "assess_image_quality",
+   "args": {},
+   "rationale": "always gate on image quality first",
+   "result": {
+    "mean_luminance": 21.87,
+    "contrast": 2.89,
+    "sharpness": 51.7,
+    "glare_fraction": 0.0,
+    "issues": [
+     "dark",
+     "low_contrast"
+    ],
+    "verdict": "enhance"
+   },
+   "ms": 2.8
+  },
+  {
+   "i": 2,
+   "planner": "rule",
+   "tool": "enhance_image",
+   "args": {},
+   "rationale": "quality issues ['dark', 'low_contrast'] are recoverable",
+   "result": {
+    "params": {
+     "gamma": 0.282,
+     "clahe_clip": 2.0,
+     "denoised": true
+    },
+    "post_quality": {
+     "mean_luminance": 140.71,
+     "contrast": 6.0,
+     "sharpness": 48.73,
+     "glare_fraction": 0.0,
+     "issues": [],
+     "verdict": "ok"
+    }
+   },
+   "ms": 187.4
+  },
+  {
+   "i": 3,
+   "planner": "rule",
+   "tool": "detect_hazards",
+   "args": {
+    "sensitivity": 0.5
+   },
+   "rationale": "image usable; run standard detection",
+   "result": {
+    "new_candidates": [
+     {
+      "id": "h1",
+      "type": "cable",
+      "bbox": [
+       361,
+       0,
+       180,
+       107
+      ],
+      "confidence": 0.269,
+      "in_walk_path": true,
+      "severity": "high"
+     }
+    ],
+    "rejected_patterns": [],
+    "threshold": 20.0,
+    "sensitivity": 0.5
+   },
+   "ms": 32.7
+  },
+  {
+   "i": 4,
+   "planner": "rule",
+   "tool": "detect_hazards",
+   "args": {
+    "sensitivity": 1.0
+   },
+   "rationale": "low-light image was enhanced (contrast compressed by noise): re-detect at maximum sensitivity",
+   "result": {
+    "new_candidates": [],
+    "rejected_patterns": [],
+    "threshold": 14.0,
+    "sensitivity": 1.0
+   },
+   "ms": 28.8
+  },
+  {
+   "i": 5,
+   "planner": "rule",
+   "tool": "inspect_region",
+   "args": {
+    "hazard_id": "h1"
+   },
+   "rationale": "verify cable candidate (conf 0.269) before acting",
+   "result": {
+    "hazard_id": "h1",
+    "type": "cable",
+    "severity": "high",
+    "confirmed": true,
+    "reason": "local_object_evidence",
+    "confidence": 0.936,
+    "object_fraction": 0.119,
+    "mean_delta_L": -54.8,
+    "edge_strength": 156.2,
+    "chroma_ref": 2.8,
+    "chroma_region": 1.3,
+    "hue_shift_deg": 1.2,
+    "hough_segments": 10,
+    "zoom": 2.0
+   },
+   "ms": 11.9
+  },
+  {
+   "i": 6,
+   "planner": "rule",
+   "tool": "request_human_approval",
+   "args": {
+    "hazard_ids": [
+     "h1"
+    ],
+    "reason": "confirmed trip/slip hazard"
+   },
+   "rationale": "high severity (cable/spill) needs a human-approved urgent alert",
+   "result": {
+    "status": "pending_human_approval",
+    "approval_id": "AP-1E504B"
+   },
+   "ms": 0.0
+  },
+  {
+   "i": 7,
+   "planner": "rule",
+   "tool": "finish",
+   "args": {
+    "summary": "Found 1 hazard(s): cable (high). High-severity items are waiting for human approval."
+   },
+   "rationale": "action taken; closing run",
+   "result": {
+    "status": "finished",
+    "outcome": "escalate"
+   },
+   "ms": 0.0
+  }
+ ]
+}

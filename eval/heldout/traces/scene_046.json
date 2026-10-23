@@ -1,0 +1,206 @@
+{
+ "run_id": "55ecd0e310dd",
+ "outcome": "clear",
+ "summary": "Walkway looks clear. 1 candidate(s) were checked and dismissed (e.g. shadows).",
+ "planners": [
+  "rule"
+ ],
+ "opencv_version": "5.0.0",
+ "quality": {
+  "mean_luminance": 12.34,
+  "contrast": 1.48,
+  "sharpness": 50.7,
+  "glare_fraction": 0.0,
+  "issues": [
+   "dark",
+   "low_contrast"
+  ],
+  "verdict": "enhance"
+ },
+ "post_quality": {
+  "mean_luminance": 137.73,
+  "contrast": 4.3,
+  "sharpness": 59.5,
+  "glare_fraction": 0.0,
+  "issues": [],
+  "verdict": "ok"
+ },
+ "enhanced": true,
+ "detections": [
+  {
+   "id": "h1",
+   "type": "cable",
+   "bbox": [
+    156,
+    0,
+    107,
+    85
+   ],
+   "area_fraction": 0.0032,
+   "confidence": 0.225,
+   "in_walk_path": true,
+   "status": "rejected",
+   "severity": "high",
+   "inspection": {
+    "confirmed": false,
+    "reason": "shadow_like",
+    "object_fraction": 0.152,
+    "mean_delta_L": -36.0,
+    "edge_strength": 59.5,
+    "chroma_ref": 6.1,
+    "chroma_region": 3.5,
+    "hue_shift_deg": 23.5,
+    "hough_segments": 6,
+    "zoom": 2.0
+   }
+  }
+ ],
+ "actions": [
+  {
+   "kind": "clear",
+   "note": "no confirmed hazards"
+  }
+ ],
+ "trace": [
+  {
+   "i": 1,
+   "planner": "rule",
+   "tool": "assess_image_quality",
+   "args": {},
+   "rationale": "always gate on image quality first",
+   "result": {
+    "mean_luminance": 12.34,
+    "contrast": 1.48,
+    "sharpness": 50.7,
+    "glare_fraction": 0.0,
+    "issues": [
+     "dark",
+     "low_contrast"
+    ],
+    "verdict": "enhance"
+   },
+   "ms": 3.8
+  },
+  {
+   "i": 2,
+   "planner": "rule",
+   "tool": "enhance_image",
+   "args": {},
+   "rationale": "quality issues ['dark', 'low_contrast'] are recoverable",
+   "result": {
+    "params": {
+     "gamma": 0.25,
+     "clahe_clip": 2.0,
+     "denoised": true
+    },
+    "post_quality": {
+     "mean_luminance": 137.73,
+     "contrast": 4.3,
+     "sharpness": 59.5,
+     "glare_fraction": 0.0,
+     "issues": [],
+     "verdict": "ok"
+    }
+   },
+   "ms": 249.2
+  },
+  {
+   "i": 3,
+   "planner": "rule",
+   "tool": "detect_hazards",
+   "args": {
+    "sensitivity": 0.5
+   },
+   "rationale": "image usable; run standard detection",
+   "result": {
+    "new_candidates": [],
+    "rejected_patterns": [],
+    "threshold": 20.0,
+    "sensitivity": 0.5
+   },
+   "ms": 29.1
+  },
+  {
+   "i": 4,
+   "planner": "rule",
+   "tool": "detect_hazards",
+   "args": {
+    "sensitivity": 1.0
+   },
+   "rationale": "low-light image was enhanced (contrast compressed by noise): re-detect at maximum sensitivity",
+   "result": {
+    "new_candidates": [
+     {
+      "id": "h1",
+      "type": "cable",
+      "bbox": [
+       156,
+       0,
+       107,
+       85
+      ],
+      "confidence": 0.225,
+      "in_walk_path": true,
+      "severity": "high"
+     }
+    ],
+    "rejected_patterns": [],
+    "threshold": 14.0,
+    "sensitivity": 1.0
+   },
+   "ms": 37.4
+  },
+  {
+   "i": 5,
+   "planner": "rule",
+   "tool": "inspect_region",
+   "args": {
+    "hazard_id": "h1"
+   },
+   "rationale": "verify cable candidate (conf 0.225) before acting",
+   "result": {
+    "hazard_id": "h1",
+    "type": "cable",
+    "severity": "high",
+    "confirmed": false,
+    "reason": "shadow_like",
+    "object_fraction": 0.152,
+    "mean_delta_L": -36.0,
+    "edge_strength": 59.5,
+    "chroma_ref": 6.1,
+    "chroma_region": 3.5,
+    "hue_shift_deg": 23.5,
+    "hough_segments": 6,
+    "zoom": 2.0
+   },
+   "ms": 6.5
+  },
+  {
+   "i": 6,
+   "planner": "rule",
+   "tool": "log_clear",
+   "args": {
+    "note": "no confirmed hazards"
+   },
+   "rationale": "all candidates rejected or none found",
+   "result": {
+    "status": "logged_clear"
+   },
+   "ms": 0.0
+  },
+  {
+   "i": 7,
+   "planner": "rule",
+   "tool": "finish",
+   "args": {
+    "summary": "Walkway looks clear. 1 candidate(s) were checked and dismissed (e.g. shadows)."
+   },
+   "rationale": "action taken; closing run",
+   "result": {
+    "status": "finished",
+    "outcome": "clear"
+   },
+   "ms": 0.0
+  }
+ ]
+}

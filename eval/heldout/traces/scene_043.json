@@ -1,0 +1,154 @@
+{
+ "run_id": "02208eb1859b",
+ "outcome": "clear",
+ "summary": "Walkway looks clear. 1 candidate(s) were checked and dismissed (e.g. shadows).",
+ "planners": [
+  "rule"
+ ],
+ "opencv_version": "5.0.0",
+ "quality": {
+  "mean_luminance": 101.63,
+  "contrast": 10.31,
+  "sharpness": 68.38,
+  "glare_fraction": 0.0,
+  "issues": [],
+  "verdict": "ok"
+ },
+ "post_quality": null,
+ "enhanced": false,
+ "detections": [
+  {
+   "id": "h1",
+   "type": "clutter",
+   "bbox": [
+    90,
+    302,
+    134,
+    65
+   ],
+   "area_fraction": 0.019,
+   "confidence": 0.238,
+   "in_walk_path": true,
+   "status": "rejected",
+   "severity": "medium",
+   "inspection": {
+    "confirmed": false,
+    "reason": "shadow_like",
+    "object_fraction": 0.969,
+    "mean_delta_L": -37.1,
+    "edge_strength": 5.3,
+    "chroma_ref": 9.8,
+    "chroma_region": 6.5,
+    "hue_shift_deg": 4.2,
+    "hough_segments": 0,
+    "zoom": 2.0
+   }
+  }
+ ],
+ "actions": [
+  {
+   "kind": "clear",
+   "note": "no confirmed hazards"
+  }
+ ],
+ "trace": [
+  {
+   "i": 1,
+   "planner": "rule",
+   "tool": "assess_image_quality",
+   "args": {},
+   "rationale": "always gate on image quality first",
+   "result": {
+    "mean_luminance": 101.63,
+    "contrast": 10.31,
+    "sharpness": 68.38,
+    "glare_fraction": 0.0,
+    "issues": [],
+    "verdict": "ok"
+   },
+   "ms": 2.8
+  },
+  {
+   "i": 2,
+   "planner": "rule",
+   "tool": "detect_hazards",
+   "args": {
+    "sensitivity": 0.5
+   },
+   "rationale": "image usable; run standard detection",
+   "result": {
+    "new_candidates": [
+     {
+      "id": "h1",
+      "type": "clutter",
+      "bbox": [
+       90,
+       302,
+       134,
+       65
+      ],
+      "confidence": 0.238,
+      "in_walk_path": true,
+      "severity": "medium"
+     }
+    ],
+    "rejected_patterns": [],
+    "threshold": 20.0,
+    "sensitivity": 0.5
+   },
+   "ms": 32.9
+  },
+  {
+   "i": 3,
+   "planner": "rule",
+   "tool": "inspect_region",
+   "args": {
+    "hazard_id": "h1"
+   },
+   "rationale": "verify clutter candidate (conf 0.238) before acting",
+   "result": {
+    "hazard_id": "h1",
+    "type": "clutter",
+    "severity": "medium",
+    "confirmed": false,
+    "reason": "shadow_like",
+    "object_fraction": 0.969,
+    "mean_delta_L": -37.1,
+    "edge_strength": 5.3,
+    "chroma_ref": 9.8,
+    "chroma_region": 6.5,
+    "hue_shift_deg": 4.2,
+    "hough_segments": 0,
+    "zoom": 2.0
+   },
+   "ms": 13.1
+  },
+  {
+   "i": 4,
+   "planner": "rule",
+   "tool": "log_clear",
+   "args": {
+    "note": "no confirmed hazards"
+   },
+   "rationale": "all candidates rejected or none found",
+   "result": {
+    "status": "logged_clear"
+   },
+   "ms": 0.0
+  },
+  {
+   "i": 5,
+   "planner": "rule",
+   "tool": "finish",
+   "args": {
+    "summary": "Walkway looks clear. 1 candidate(s) were checked and dismissed (e.g. shadows)."
+   },
+   "rationale": "action taken; closing run",
+   "result": {
+    "status": "finished",
+    "outcome": "clear"
+   },
+   "ms": 0.0
+  }
+ ]
+}

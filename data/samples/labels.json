@@ -1,0 +1,1016 @@
+[
+ {
+  "name": "scene_000.jpg",
+  "kind": "carpet:",
+  "floor": "carpet",
+  "hazards": [],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "clear"
+ },
+ {
+  "name": "scene_001.jpg",
+  "kind": "wood:",
+  "floor": "wood",
+  "hazards": [],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "clear"
+ },
+ {
+  "name": "scene_002.jpg",
+  "kind": "tile:",
+  "floor": "tile",
+  "hazards": [],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "clear"
+ },
+ {
+  "name": "scene_003.jpg",
+  "kind": "carpet:",
+  "floor": "carpet",
+  "hazards": [],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "clear"
+ },
+ {
+  "name": "scene_004.jpg",
+  "kind": "wood:",
+  "floor": "wood",
+  "hazards": [],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "clear"
+ },
+ {
+  "name": "scene_005.jpg",
+  "kind": "tile:",
+  "floor": "tile",
+  "hazards": [],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "clear"
+ },
+ {
+  "name": "scene_006.jpg",
+  "kind": "carpet:",
+  "floor": "carpet",
+  "hazards": [],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "clear"
+ },
+ {
+  "name": "scene_007.jpg",
+  "kind": "wood:",
+  "floor": "wood",
+  "hazards": [],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "clear"
+ },
+ {
+  "name": "scene_008.jpg",
+  "kind": "tile:",
+  "floor": "tile",
+  "hazards": [],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "clear"
+ },
+ {
+  "name": "scene_009.jpg",
+  "kind": "carpet:",
+  "floor": "carpet",
+  "hazards": [],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "clear"
+ },
+ {
+  "name": "scene_010.jpg",
+  "kind": "carpet:cable",
+  "floor": "carpet",
+  "hazards": [
+   {
+    "type": "cable",
+    "bbox": [
+     381,
+     185,
+     195,
+     205
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "escalate"
+ },
+ {
+  "name": "scene_011.jpg",
+  "kind": "wood:cable",
+  "floor": "wood",
+  "hazards": [
+   {
+    "type": "cable",
+    "bbox": [
+     117,
+     385,
+     232,
+     95
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "escalate"
+ },
+ {
+  "name": "scene_012.jpg",
+  "kind": "tile:cable",
+  "floor": "tile",
+  "hazards": [
+   {
+    "type": "cable",
+    "bbox": [
+     441,
+     0,
+     144,
+     189
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "escalate"
+ },
+ {
+  "name": "scene_013.jpg",
+  "kind": "carpet:cable",
+  "floor": "carpet",
+  "hazards": [
+   {
+    "type": "cable",
+    "bbox": [
+     61,
+     134,
+     196,
+     329
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "escalate"
+ },
+ {
+  "name": "scene_014.jpg",
+  "kind": "carpet:cable",
+  "floor": "carpet",
+  "hazards": [
+   {
+    "type": "cable",
+    "bbox": [
+     1,
+     1,
+     65,
+     399
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "escalate"
+ },
+ {
+  "name": "scene_015.jpg",
+  "kind": "wood:cable",
+  "floor": "wood",
+  "hazards": [
+   {
+    "type": "cable",
+    "bbox": [
+     468,
+     0,
+     117,
+     280
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "escalate"
+ },
+ {
+  "name": "scene_016.jpg",
+  "kind": "tile:cable",
+  "floor": "tile",
+  "hazards": [
+   {
+    "type": "cable",
+    "bbox": [
+     404,
+     325,
+     236,
+     155
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "escalate"
+ },
+ {
+  "name": "scene_017.jpg",
+  "kind": "carpet:cable",
+  "floor": "carpet",
+  "hazards": [
+   {
+    "type": "cable",
+    "bbox": [
+     405,
+     1,
+     130,
+     147
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "escalate"
+ },
+ {
+  "name": "scene_018.jpg",
+  "kind": "carpet:clutter",
+  "floor": "carpet",
+  "hazards": [
+   {
+    "type": "clutter",
+    "bbox": [
+     128,
+     246,
+     67,
+     139
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "work_order"
+ },
+ {
+  "name": "scene_019.jpg",
+  "kind": "wood:clutter",
+  "floor": "wood",
+  "hazards": [
+   {
+    "type": "clutter",
+    "bbox": [
+     433,
+     315,
+     103,
+     123
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "work_order"
+ },
+ {
+  "name": "scene_020.jpg",
+  "kind": "tile:clutter",
+  "floor": "tile",
+  "hazards": [
+   {
+    "type": "clutter",
+    "bbox": [
+     158,
+     314,
+     89,
+     69
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "work_order"
+ },
+ {
+  "name": "scene_021.jpg",
+  "kind": "wood:clutter",
+  "floor": "wood",
+  "hazards": [
+   {
+    "type": "clutter",
+    "bbox": [
+     222,
+     156,
+     87,
+     77
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "work_order"
+ },
+ {
+  "name": "scene_022.jpg",
+  "kind": "carpet:clutter",
+  "floor": "carpet",
+  "hazards": [
+   {
+    "type": "clutter",
+    "bbox": [
+     288,
+     232,
+     92,
+     125
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "work_order"
+ },
+ {
+  "name": "scene_023.jpg",
+  "kind": "wood:clutter",
+  "floor": "wood",
+  "hazards": [
+   {
+    "type": "clutter",
+    "bbox": [
+     377,
+     253,
+     77,
+     108
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "work_order"
+ },
+ {
+  "name": "scene_024.jpg",
+  "kind": "tile:clutter",
+  "floor": "tile",
+  "hazards": [
+   {
+    "type": "clutter",
+    "bbox": [
+     346,
+     99,
+     82,
+     81
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "work_order"
+ },
+ {
+  "name": "scene_025.jpg",
+  "kind": "wood:clutter",
+  "floor": "wood",
+  "hazards": [
+   {
+    "type": "clutter",
+    "bbox": [
+     154,
+     95,
+     107,
+     77
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "work_order"
+ },
+ {
+  "name": "scene_026.jpg",
+  "kind": "carpet:spill",
+  "floor": "carpet",
+  "hazards": [
+   {
+    "type": "spill",
+    "bbox": [
+     99,
+     56,
+     135,
+     147
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "escalate"
+ },
+ {
+  "name": "scene_027.jpg",
+  "kind": "wood:spill",
+  "floor": "wood",
+  "hazards": [
+   {
+    "type": "spill",
+    "bbox": [
+     118,
+     71,
+     154,
+     192
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "escalate"
+ },
+ {
+  "name": "scene_028.jpg",
+  "kind": "tile:spill",
+  "floor": "tile",
+  "hazards": [
+   {
+    "type": "spill",
+    "bbox": [
+     308,
+     176,
+     137,
+     127
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "escalate"
+ },
+ {
+  "name": "scene_029.jpg",
+  "kind": "carpet:spill",
+  "floor": "carpet",
+  "hazards": [
+   {
+    "type": "spill",
+    "bbox": [
+     84,
+     175,
+     140,
+     166
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "escalate"
+ },
+ {
+  "name": "scene_030.jpg",
+  "kind": "carpet:spill",
+  "floor": "carpet",
+  "hazards": [
+   {
+    "type": "spill",
+    "bbox": [
+     262,
+     144,
+     136,
+     123
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "escalate"
+ },
+ {
+  "name": "scene_031.jpg",
+  "kind": "wood:spill",
+  "floor": "wood",
+  "hazards": [
+   {
+    "type": "spill",
+    "bbox": [
+     264,
+     195,
+     91,
+     100
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "escalate"
+ },
+ {
+  "name": "scene_032.jpg",
+  "kind": "tile:spill",
+  "floor": "tile",
+  "hazards": [
+   {
+    "type": "spill",
+    "bbox": [
+     268,
+     76,
+     201,
+     124
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "escalate"
+ },
+ {
+  "name": "scene_033.jpg",
+  "kind": "carpet:spill",
+  "floor": "carpet",
+  "hazards": [
+   {
+    "type": "spill",
+    "bbox": [
+     136,
+     157,
+     188,
+     169
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "escalate"
+ },
+ {
+  "name": "scene_034.jpg",
+  "kind": "carpet:cable+clutter",
+  "floor": "carpet",
+  "hazards": [
+   {
+    "type": "cable",
+    "bbox": [
+     90,
+     7,
+     328,
+     316
+    ]
+   },
+   {
+    "type": "clutter",
+    "bbox": [
+     390,
+     91,
+     57,
+     59
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "escalate"
+ },
+ {
+  "name": "scene_035.jpg",
+  "kind": "wood:spill+clutter",
+  "floor": "wood",
+  "hazards": [
+   {
+    "type": "spill",
+    "bbox": [
+     108,
+     218,
+     165,
+     201
+    ]
+   },
+   {
+    "type": "clutter",
+    "bbox": [
+     206,
+     125,
+     83,
+     105
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "escalate"
+ },
+ {
+  "name": "scene_036.jpg",
+  "kind": "tile:cable+spill",
+  "floor": "tile",
+  "hazards": [
+   {
+    "type": "cable",
+    "bbox": [
+     33,
+     272,
+     330,
+     182
+    ]
+   },
+   {
+    "type": "spill",
+    "bbox": [
+     169,
+     114,
+     183,
+     115
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "escalate"
+ },
+ {
+  "name": "scene_037.jpg",
+  "kind": "carpet:clutter+clutter",
+  "floor": "carpet",
+  "hazards": [
+   {
+    "type": "clutter",
+    "bbox": [
+     241,
+     333,
+     93,
+     101
+    ]
+   },
+   {
+    "type": "clutter",
+    "bbox": [
+     334,
+     114,
+     107,
+     97
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "work_order"
+ },
+ {
+  "name": "scene_038.jpg",
+  "kind": "wood:cable+clutter",
+  "floor": "wood",
+  "hazards": [
+   {
+    "type": "cable",
+    "bbox": [
+     546,
+     134,
+     94,
+     47
+    ]
+   },
+   {
+    "type": "clutter",
+    "bbox": [
+     153,
+     71,
+     87,
+     84
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "escalate"
+ },
+ {
+  "name": "scene_039.jpg",
+  "kind": "tile:clutter+spill",
+  "floor": "tile",
+  "hazards": [
+   {
+    "type": "clutter",
+    "bbox": [
+     135,
+     79,
+     135,
+     130
+    ]
+   },
+   {
+    "type": "spill",
+    "bbox": [
+     173,
+     85,
+     131,
+     188
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "none",
+  "expected_action": "escalate"
+ },
+ {
+  "name": "scene_040.jpg",
+  "kind": "carpet:|shadow",
+  "floor": "carpet",
+  "hazards": [],
+  "degradation": "none",
+  "distractor": "shadow",
+  "expected_action": "clear"
+ },
+ {
+  "name": "scene_041.jpg",
+  "kind": "wood:|shadow",
+  "floor": "wood",
+  "hazards": [],
+  "degradation": "none",
+  "distractor": "shadow",
+  "expected_action": "clear"
+ },
+ {
+  "name": "scene_042.jpg",
+  "kind": "tile:|shadow",
+  "floor": "tile",
+  "hazards": [],
+  "degradation": "none",
+  "distractor": "shadow",
+  "expected_action": "clear"
+ },
+ {
+  "name": "scene_043.jpg",
+  "kind": "carpet:|shadow",
+  "floor": "carpet",
+  "hazards": [],
+  "degradation": "none",
+  "distractor": "shadow",
+  "expected_action": "clear"
+ },
+ {
+  "name": "scene_044.jpg",
+  "kind": "wood:|shadow",
+  "floor": "wood",
+  "hazards": [],
+  "degradation": "none",
+  "distractor": "shadow",
+  "expected_action": "clear"
+ },
+ {
+  "name": "scene_045.jpg",
+  "kind": "tile:|shadow",
+  "floor": "tile",
+  "hazards": [],
+  "degradation": "none",
+  "distractor": "shadow",
+  "expected_action": "clear"
+ },
+ {
+  "name": "scene_046.jpg",
+  "kind": "carpet:cable|dark",
+  "floor": "carpet",
+  "hazards": [
+   {
+    "type": "cable",
+    "bbox": [
+     358,
+     0,
+     186,
+     110
+    ]
+   }
+  ],
+  "degradation": "dark",
+  "distractor": "none",
+  "expected_action": "escalate"
+ },
+ {
+  "name": "scene_047.jpg",
+  "kind": "wood:clutter|dark",
+  "floor": "wood",
+  "hazards": [
+   {
+    "type": "clutter",
+    "bbox": [
+     484,
+     176,
+     69,
+     61
+    ]
+   }
+  ],
+  "degradation": "dark",
+  "distractor": "none",
+  "expected_action": "work_order"
+ },
+ {
+  "name": "scene_048.jpg",
+  "kind": "tile:spill|dark",
+  "floor": "tile",
+  "hazards": [
+   {
+    "type": "spill",
+    "bbox": [
+     404,
+     257,
+     171,
+     185
+    ]
+   }
+  ],
+  "degradation": "dark",
+  "distractor": "none",
+  "expected_action": "escalate"
+ },
+ {
+  "name": "scene_049.jpg",
+  "kind": "carpet:clutter|dark",
+  "floor": "carpet",
+  "hazards": [
+   {
+    "type": "clutter",
+    "bbox": [
+     428,
+     161,
+     67,
+     81
+    ]
+   }
+  ],
+  "degradation": "dark",
+  "distractor": "none",
+  "expected_action": "work_order"
+ },
+ {
+  "name": "scene_050.jpg",
+  "kind": "wood:cable|dark",
+  "floor": "wood",
+  "hazards": [
+   {
+    "type": "cable",
+    "bbox": [
+     609,
+     279,
+     31,
+     201
+    ]
+   }
+  ],
+  "degradation": "dark",
+  "distractor": "none",
+  "expected_action": "escalate"
+ },
+ {
+  "name": "scene_051.jpg",
+  "kind": "carpet:|dark",
+  "floor": "carpet",
+  "hazards": [],
+  "degradation": "dark",
+  "distractor": "none",
+  "expected_action": "clear"
+ },
+ {
+  "name": "scene_052.jpg",
+  "kind": "carpet:cable|blurry",
+  "floor": "carpet",
+  "hazards": [
+   {
+    "type": "cable",
+    "bbox": [
+     158,
+     73,
+     292,
+     199
+    ]
+   }
+  ],
+  "degradation": "blurry",
+  "distractor": "none",
+  "expected_action": "recapture"
+ },
+ {
+  "name": "scene_053.jpg",
+  "kind": "wood:|blurry",
+  "floor": "wood",
+  "hazards": [],
+  "degradation": "blurry",
+  "distractor": "none",
+  "expected_action": "recapture"
+ },
+ {
+  "name": "scene_054.jpg",
+  "kind": "tile:clutter|blurry",
+  "floor": "tile",
+  "hazards": [
+   {
+    "type": "clutter",
+    "bbox": [
+     83,
+     101,
+     119,
+     85
+    ]
+   }
+  ],
+  "degradation": "blurry",
+  "distractor": "none",
+  "expected_action": "recapture"
+ },
+ {
+  "name": "scene_055.jpg",
+  "kind": "carpet:spill|blurry",
+  "floor": "carpet",
+  "hazards": [
+   {
+    "type": "spill",
+    "bbox": [
+     285,
+     78,
+     133,
+     208
+    ]
+   }
+  ],
+  "degradation": "blurry",
+  "distractor": "none",
+  "expected_action": "recapture"
+ },
+ {
+  "name": "scene_056.jpg",
+  "kind": "carpet:cable|shadow",
+  "floor": "carpet",
+  "hazards": [
+   {
+    "type": "cable",
+    "bbox": [
+     508,
+     338,
+     132,
+     101
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "shadow",
+  "expected_action": "escalate"
+ },
+ {
+  "name": "scene_057.jpg",
+  "kind": "wood:clutter|shadow",
+  "floor": "wood",
+  "hazards": [
+   {
+    "type": "clutter",
+    "bbox": [
+     468,
+     215,
+     107,
+     127
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "shadow",
+  "expected_action": "work_order"
+ },
+ {
+  "name": "scene_058.jpg",
+  "kind": "tile:cable|shadow",
+  "floor": "tile",
+  "hazards": [
+   {
+    "type": "cable",
+    "bbox": [
+     161,
+     1,
+     261,
+     108
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "shadow",
+  "expected_action": "escalate"
+ },
+ {
+  "name": "scene_059.jpg",
+  "kind": "carpet:spill|shadow",
+  "floor": "carpet",
+  "hazards": [
+   {
+    "type": "spill",
+    "bbox": [
+     169,
+     108,
+     127,
+     173
+    ]
+   }
+  ],
+  "degradation": "none",
+  "distractor": "shadow",
+  "expected_action": "escalate"
+ }
+]

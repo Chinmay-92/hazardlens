@@ -1,0 +1,249 @@
+{
+ "run_id": "322efac93dea",
+ "outcome": "escalate",
+ "summary": "Found 2 hazard(s): cable (high), spill (high). High-severity items are waiting for human approval.",
+ "planners": [
+  "rule"
+ ],
+ "opencv_version": "5.0.0",
+ "quality": {
+  "mean_luminance": 164.47,
+  "contrast": 17.16,
+  "sharpness": 2593.64,
+  "glare_fraction": 0.0001,
+  "issues": [],
+  "verdict": "ok"
+ },
+ "post_quality": null,
+ "enhanced": false,
+ "detections": [
+  {
+   "id": "h1",
+   "type": "cable",
+   "bbox": [
+    33,
+    272,
+    330,
+    182
+   ],
+   "area_fraction": 0.0137,
+   "confidence": 0.91,
+   "in_walk_path": true,
+   "status": "confirmed",
+   "severity": "high",
+   "inspection": {
+    "confirmed": true,
+    "reason": "local_object_evidence",
+    "confidence": 0.923,
+    "object_fraction": 0.076,
+    "mean_delta_L": -70.2,
+    "edge_strength": 196.0,
+    "chroma_ref": 6.3,
+    "chroma_region": 42.4,
+    "hue_shift_deg": 39.8,
+    "hough_segments": 136,
+    "zoom": 1.0
+   }
+  },
+  {
+   "id": "h2",
+   "type": "spill",
+   "bbox": [
+    175,
+    119,
+    171,
+    104
+   ],
+   "area_fraction": 0.0424,
+   "confidence": 0.257,
+   "in_walk_path": true,
+   "status": "confirmed",
+   "severity": "high",
+   "inspection": {
+    "confirmed": true,
+    "reason": "local_object_evidence",
+    "confidence": 0.738,
+    "object_fraction": 0.806,
+    "mean_delta_L": 41.2,
+    "edge_strength": 23.2,
+    "chroma_ref": 6.3,
+    "chroma_region": 4.1,
+    "hue_shift_deg": 5.1,
+    "hough_segments": 57,
+    "zoom": 2.0
+   }
+  }
+ ],
+ "actions": [
+  {
+   "kind": "approval",
+   "id": "AP-C9CA43",
+   "hazard_ids": [
+    "h1",
+    "h2"
+   ]
+  }
+ ],
+ "trace": [
+  {
+   "i": 1,
+   "planner": "rule",
+   "tool": "assess_image_quality",
+   "args": {},
+   "rationale": "always gate on image quality first",
+   "result": {
+    "mean_luminance": 164.47,
+    "contrast": 17.16,
+    "sharpness": 2593.64,
+    "glare_fraction": 0.0001,
+    "issues": [],
+    "verdict": "ok"
+   },
+   "ms": 2.6
+  },
+  {
+   "i": 2,
+   "planner": "rule",
+   "tool": "detect_hazards",
+   "args": {
+    "sensitivity": 0.5
+   },
+   "rationale": "image usable; run standard detection",
+   "result": {
+    "new_candidates": [
+     {
+      "id": "h1",
+      "type": "cable",
+      "bbox": [
+       33,
+       272,
+       330,
+       182
+      ],
+      "confidence": 0.91,
+      "in_walk_path": true,
+      "severity": "high"
+     }
+    ],
+    "rejected_patterns": [],
+    "threshold": 20.0,
+    "sensitivity": 0.5
+   },
+   "ms": 17.0
+  },
+  {
+   "i": 3,
+   "planner": "rule",
+   "tool": "detect_hazards",
+   "args": {
+    "sensitivity": 0.9
+   },
+   "rationale": "specular highlights seen but no spill candidate: re-detect at high sensitivity for clear liquid",
+   "result": {
+    "new_candidates": [
+     {
+      "id": "h2",
+      "type": "spill",
+      "bbox": [
+       175,
+       119,
+       171,
+       104
+      ],
+      "confidence": 0.257,
+      "in_walk_path": true,
+      "severity": "high"
+     }
+    ],
+    "rejected_patterns": [],
+    "threshold": 15.2,
+    "sensitivity": 0.9
+   },
+   "ms": 17.7
+  },
+  {
+   "i": 4,
+   "planner": "rule",
+   "tool": "inspect_region",
+   "args": {
+    "hazard_id": "h2"
+   },
+   "rationale": "verify spill candidate (conf 0.257) before acting",
+   "result": {
+    "hazard_id": "h2",
+    "type": "spill",
+    "severity": "high",
+    "confirmed": true,
+    "reason": "local_object_evidence",
+    "confidence": 0.738,
+    "object_fraction": 0.806,
+    "mean_delta_L": 41.2,
+    "edge_strength": 23.2,
+    "chroma_ref": 6.3,
+    "chroma_region": 4.1,
+    "hue_shift_deg": 5.1,
+    "hough_segments": 57,
+    "zoom": 2.0
+   },
+   "ms": 18.7
+  },
+  {
+   "i": 5,
+   "planner": "rule",
+   "tool": "inspect_region",
+   "args": {
+    "hazard_id": "h1"
+   },
+   "rationale": "verify cable candidate (conf 0.91) before acting",
+   "result": {
+    "hazard_id": "h1",
+    "type": "cable",
+    "severity": "high",
+    "confirmed": true,
+    "reason": "local_object_evidence",
+    "confidence": 0.923,
+    "object_fraction": 0.076,
+    "mean_delta_L": -70.2,
+    "edge_strength": 196.0,
+    "chroma_ref": 6.3,
+    "chroma_region": 42.4,
+    "hue_shift_deg": 39.8,
+    "hough_segments": 136,
+    "zoom": 1.0
+   },
+   "ms": 7.3
+  },
+  {
+   "i": 6,
+   "planner": "rule",
+   "tool": "request_human_approval",
+   "args": {
+    "hazard_ids": [
+     "h1",
+     "h2"
+    ],
+    "reason": "confirmed trip/slip hazard"
+   },
+   "rationale": "high severity (cable/spill) needs a human-approved urgent alert",
+   "result": {
+    "status": "pending_human_approval",
+    "approval_id": "AP-C9CA43"
+   },
+   "ms": 0.0
+  },
+  {
+   "i": 7,
+   "planner": "rule",
+   "tool": "finish",
+   "args": {
+    "summary": "Found 2 hazard(s): cable (high), spill (high). High-severity items are waiting for human approval."
+   },
+   "rationale": "action taken; closing run",
+   "result": {
+    "status": "finished",
+    "outcome": "escalate"
+   },
+   "ms": 0.0
+  }
+ ]
+}

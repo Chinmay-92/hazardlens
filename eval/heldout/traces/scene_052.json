@@ -1,0 +1,75 @@
+{
+ "run_id": "21eadbe25849",
+ "outcome": "recapture",
+ "summary": "The photo could not be analysed reliably, so I asked for a retake.",
+ "planners": [
+  "rule"
+ ],
+ "opencv_version": "5.0.0",
+ "quality": {
+  "mean_luminance": 125.85,
+  "contrast": 8.27,
+  "sharpness": 6.96,
+  "glare_fraction": 0.0,
+  "issues": [
+   "blurry"
+  ],
+  "verdict": "unusable"
+ },
+ "post_quality": null,
+ "enhanced": false,
+ "detections": [],
+ "actions": [
+  {
+   "kind": "recapture",
+   "guidance": "Please retake the photo: hold the phone still and tap to focus."
+  }
+ ],
+ "trace": [
+  {
+   "i": 1,
+   "planner": "rule",
+   "tool": "assess_image_quality",
+   "args": {},
+   "rationale": "always gate on image quality first",
+   "result": {
+    "mean_luminance": 125.85,
+    "contrast": 8.27,
+    "sharpness": 6.96,
+    "glare_fraction": 0.0,
+    "issues": [
+     "blurry"
+    ],
+    "verdict": "unusable"
+   },
+   "ms": 2.3
+  },
+  {
+   "i": 2,
+   "planner": "rule",
+   "tool": "request_recapture",
+   "args": {
+    "guidance": "Please retake the photo: hold the phone still and tap to focus."
+   },
+   "rationale": "quality issues ['blurry'] cannot be fixed by enhancement",
+   "result": {
+    "status": "recapture_requested"
+   },
+   "ms": 0.0
+  },
+  {
+   "i": 3,
+   "planner": "rule",
+   "tool": "finish",
+   "args": {
+    "summary": "The photo could not be analysed reliably, so I asked for a retake."
+   },
+   "rationale": "action taken; closing run",
+   "result": {
+    "status": "finished",
+    "outcome": "recapture"
+   },
+   "ms": 0.0
+  }
+ ]
+}

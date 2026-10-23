@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HazardLens</title>
+<style>
+:root{--bg:#f6f7f4;--panel:#fff;--ink:#14201c;--muted:#56645e;--line:#d9dfdb;--accent:#0b6e4f;
+--high:#b42318;--med:#b54708;--ok:#067647;--info:#175cd3;--focus:#ffbf47}
+@media (prefers-color-scheme: dark){:root{--bg:#0f1513;--panel:#18211e;--ink:#e8efec;--muted:#a3b2ac;
+--line:#2b3733;--accent:#4cc79a;--high:#ff7b6e;--med:#ffb35c;--ok:#5ad49b;--info:#7fb1ff}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{padding:20px 16px 8px;max-width:1200px;margin:auto}
+header h1{margin:0;font-size:1.6rem}
+header p{margin:4px 0 0;color:var(--muted)}
+main{max-width:1200px;margin:auto;padding:8px 16px 40px;display:grid;grid-template-columns:minmax(280px,360px) 1fr;gap:16px}
+@media (max-width:860px){main{grid-template-columns:1fr}}
+section{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+h2{font-size:1.1rem;margin:0 0 10px}
+label{display:block;font-weight:600;margin:10px 0 4px}
+input[type=text],input[type=password],select{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
+input[type=file]{width:100%}
+button{font:inherit;font-weight:600;border:0;border-radius:8px;padding:12px 16px;cursor:pointer;background:var(--accent);color:#fff;min-height:44px}
+button.secondary{background:transparent;color:var(--ink);border:1px solid var(--line)}
+button.danger{background:var(--high)}
+button:disabled{opacity:.5;cursor:progress}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.samples{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:6px}
+.samples button{padding:0;background:none;border:2px solid transparent;border-radius:6px;min-height:0}
+.samples button[aria-pressed=true]{border-color:var(--accent)}
+.samples img{width:100%;display:block;border-radius:4px}
+.outcome{font-size:1.25rem;font-weight:700;padding:12px 14px;border-radius:10px;border-left:8px solid}
+.o-escalate{border-color:var(--high);background:color-mix(in srgb,var(--high) 12%,transparent)}
+.o-work_order{border-color:var(--med);background:color-mix(in srgb,var(--med) 12%,transparent)}
+.o-clear{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,transparent)}
+.o-recapture{border-color:var(--info);background:color-mix(in srgb,var(--info) 12%,transparent)}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
+@media (max-width:1000px){.result-grid{grid-template-columns:1fr}}
+#annotated{width:100%;border-radius:8px;border:1px solid var(--line)}
+ol.trace{list-style:none;padding:0;margin:0;counter-reset:s}
+ol.trace li{border-left:3px solid var(--line);padding:6px 0 10px 12px;position:relative}
+ol.trace li::before{counter-increment:s;content:counter(s);position:absolute;left:-12px;top:6px;width:20px;height:20px;border-radius:50%;background:var(--panel);border:2px solid var(--accent);font-size:.7rem;text-align:center;line-height:16px}
+.tool{font-family:ui-monospace,Menlo,monospace;font-weight:700}
+.why{color:var(--muted);font-size:.92rem}
+.badge{display:inline-block;font-size:.75rem;padding:1px 8px;border-radius:99px;border:1px solid var(--line);margin-left:6px}
+.badge.g{border-color:var(--high);color:var(--high)}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{text-align:left;padding:6px;border-bottom:1px solid var(--line)}
+.card{border:1px solid var(--line);border-radius:10px;padding:12px;margin-top:8px}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.muted{color:var(--muted)}
+details summary{cursor:pointer;color:var(--muted)}
+pre{white-space:pre-wrap;word-break:break-word;font-size:.8rem;max-height:260px;overflow:auto;background:var(--bg);padding:8px;border-radius:6px}
+.sr{position:absolute;left:-9999px}
+</style>
+</head>
+<body>
+<header>
+  <h1>HazardLens</h1>
+  <p>Photograph a walkway. An OpenCV&nbsp;5 agent checks image quality, looks for trip and slip hazards, double-checks what it finds, and asks a person before raising an urgent alert.</p>
+</header>
+<main>
+  <div>
+    <section aria-labelledby="h-in">
+      <h2 id="h-in">1. Choose a photo</h2>
+      <label for="file">Upload or take a photo of the floor</label>
+      <input id="file" type="file" accept="image/jpeg,image/png" capture="environment">
+      <label for="loc">Location (optional)</label>
+      <input id="loc" type="text" maxlength="120" placeholder="e.g. Corridor B, outside room 12">
+      <label for="planner">Decision-maker</label>
+      <select id="planner">
+        <option value="auto">Auto (Claude if configured, else rule policy)</option>
+        <option value="rule">Deterministic rule policy</option>
+        <option value="llm">Claude (LLM tool use)</option>
+      </select>
+      <div class="row"><button id="go">Inspect photo</button></div>
+      <label id="h-s">…or try a synthetic demo scene</label>
+      <div class="samples" id="samples" role="group" aria-labelledby="h-s"></div>
+      <p class="muted" style="font-size:.85rem">Demo images are synthetic (generated by this project). Uploaded photos are analysed in memory and not stored.</p>
+    </section>
+    <section aria-labelledby="h-ap" style="margin-top:16px">
+      <h2 id="h-ap">3. Human approvals</h2>
+      <label for="tok">Approver token (if required)</label>
+      <input id="tok" type="password" autocomplete="off">
+      <label for="who">Your name</label>
+      <input id="who" type="text" maxlength="60" value="duty manager">
+      <div id="approvals" aria-live="polite"><p class="muted">No pending approvals.</p></div>
+    </section>
+  </div>
+  <section aria-labelledby="h-res">
+    <h2 id="h-res">2. What the agent saw and did</h2>
+    <div id="status" role="status" aria-live="polite" class="muted">Choose a photo to begin.</div>
+    <div id="result" hidden>
+      <div id="outcome" class="outcome"></div>
+      <p id="summary"></p>
+      <div class="result-grid">
+        <div>
+          <img id="annotated" alt="">
+          <table aria-label="Detections"><thead><tr><th>ID</th><th>Type</th><th>Status</th><th>Severity</th><th>Conf.</th></tr></thead><tbody id="dets"></tbody></table>
+        </div>
+        <div>
+          <h2>Decision trace</h2>
+          <ol class="trace" id="trace"></ol>
+          <details><summary>Raw JSON</summary><pre id="raw"></pre></details>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+const $ = s => document.querySelector(s);
+const OUT = {escalate:"Urgent hazard - waiting for human approval", work_order:"Routine tidy-up requested",
+             clear:"Walkway looks clear", recapture:"Please retake the photo"};
+const DEMOS = ["scene_043.jpg","scene_046.jpg","scene_036.jpg","scene_052.jpg","scene_018.jpg","scene_026.jpg","scene_012.jpg","scene_000.jpg"];
+let chosen = null;
+function esc(t){return String(t).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function brief(r){ if(!r) return ""; if(r.error) return "error: "+r.error;
+  if(r.verdict) return `verdict ${r.verdict}; L*=${r.mean_luminance}, sharpness=${r.sharpness}, glare=${r.glare_fraction}`;
+  if(r.post_quality) return `gamma ${r.params.gamma}, CLAHE; now ${r.post_quality.verdict} (L*=${r.post_quality.mean_luminance})`;
+  if(r.new_candidates) return `${r.new_candidates.length} candidate(s): ` + r.new_candidates.map(c=>`${c.id} ${c.type} (${c.confidence})`).join(", ");
+  if("confirmed" in r) return `${r.hazard_id||""} ${r.confirmed?"CONFIRMED":"REJECTED"} - ${r.reason}`;
+  return r.status || JSON.stringify(r).slice(0,120); }
+async function loadSamples(){
+  const box = $("#samples");
+  for (const n of DEMOS){ const b=document.createElement("button"); b.setAttribute("aria-pressed","false");
+    b.innerHTML=`<img src="/api/samples/${n}" alt="Demo scene ${n}">`; b.onclick=()=>runSample(n,b); box.appendChild(b);} }
+async function runSample(n,btn){ document.querySelectorAll(".samples button").forEach(b=>b.setAttribute("aria-pressed","false"));
+  btn.setAttribute("aria-pressed","true"); await call(`/api/inspect_sample/${n}?planner=${$("#planner").value}`, {method:"POST"}); }
+$("#go").onclick = async () => { const f=$("#file").files[0]; if(!f){ $("#status").textContent="Please choose a photo first."; $("#file").focus(); return;}
+  const fd=new FormData(); fd.append("file",f); fd.append("location",$("#loc").value); fd.append("planner",$("#planner").value);
+  await call("/api/inspect",{method:"POST",body:fd}); };
+async function call(url,opts){ $("#go").disabled=true; $("#status").textContent="Analysing…";
+  try{ const r=await fetch(url,opts); const j=await r.json(); if(!r.ok) throw new Error(j.detail||r.status); render(j);}
+  catch(e){ $("#status").textContent="Something went wrong: "+e.message; }
+  finally{ $("#go").disabled=false; refreshApprovals(); } }
+function render(j){
+  $("#result").hidden=false; $("#status").textContent=`Run ${j.run_id} finished in ${j.trace.length} steps (planner: ${j.planners.join(" → ")}, OpenCV ${j.opencv_version}).`;
+  const o=$("#outcome"); o.className="outcome o-"+j.outcome; o.textContent=OUT[j.outcome]||j.outcome;
+  $("#summary").textContent=j.summary;
+  const img=$("#annotated"); img.src="data:image/jpeg;base64,"+j.annotated_jpeg_b64;
+  img.alt=`Annotated photo. ${j.detections.length} candidate region(s): `+j.detections.map(d=>`${d.type} ${d.status}`).join(", ");
+  $("#dets").innerHTML=j.detections.map(d=>`<tr><td>${esc(d.id)}</td><td>${esc(d.type)}</td><td>${esc(d.status)}${d.inspection?` <span class="muted">(${esc(d.inspection.reason)})</span>`:""}</td><td>${esc(d.severity)}</td><td>${d.confidence}</td></tr>`).join("")||`<tr><td colspan=5 class="muted">No candidates</td></tr>`;
+  $("#trace").innerHTML=j.trace.map(t=>`<li><span class="tool">${esc(t.tool)}</span><span class="badge">${esc(t.planner)}</span><span class="badge">${t.ms} ms</span>${t.guardrail?`<span class="badge g">guardrail</span>`:""}
+    <div>${esc(brief(t.result))}</div><div class="why">${esc(t.rationale||"")}${t.guardrail?" — "+esc(t.guardrail):""}</div></li>`).join("");
+  $("#raw").textContent=JSON.stringify({...j, annotated_jpeg_b64:"…"},null,1);
+  $("#outcome").focus?.(); }
+async function refreshApprovals(){
+  const r=await fetch("/api/approvals"); const j=await r.json(); const box=$("#approvals");
+  const items=j.approvals.slice().reverse().slice(0,6);
+  if(!items.length){ box.innerHTML='<p class="muted">No pending approvals.</p>'; return; }
+  box.innerHTML=items.map(a=>`<div class="card"><strong>${esc(a.id)}</strong> · ${esc(a.status)}<br>
+    ${a.hazards.map(h=>esc(h.type)).join(", ")} at ${esc(a.location||"unspecified")}<br><span class="muted">${esc(a.reason)}</span>
+    ${a.status==="pending"?`<div class="row"><button onclick="decide('${a.id}',true)">Approve alert</button><button class="secondary" onclick="decide('${a.id}',false)">Reject</button></div>`:""}</div>`).join("")
+    + (j.notifications.length?`<p class="muted">Last alert: ${esc(j.notifications.at(-1).message)} (via ${esc(j.notifications.at(-1).channel)})</p>`:""); }
+async function decide(id,approve){
+  const r=await fetch(`/api/approvals/${id}`,{method:"POST",headers:{"content-type":"application/json","x-approver-token":$("#tok").value},
+    body:JSON.stringify({approve, reviewer:$("#who").value||"anonymous"})});
+  if(!r.ok){ $("#status").textContent="Approval failed: "+(await r.json()).detail; }
+  refreshApprovals(); }
+loadSamples(); refreshApprovals();
+</script>
+</body>
+</html>

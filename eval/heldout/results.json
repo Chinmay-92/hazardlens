@@ -1,0 +1,971 @@
+[
+ {
+  "config": "single_shot",
+  "n_images": 60,
+  "outcome_accuracy": 0.717,
+  "escalation_recall": 0.778,
+  "unsafe_misses": [
+   "scene_034.jpg",
+   "scene_038.jpg",
+   "scene_039.jpg",
+   "scene_046.jpg",
+   "scene_048.jpg",
+   "scene_050.jpg"
+  ],
+  "false_escalation_rate": 0.034,
+  "recapture_recall": 0.0,
+  "unneeded_recaptures": [],
+  "detection": {
+   "tp": 37,
+   "fp": 13,
+   "fn": 8,
+   "precision": 0.74,
+   "recall": 0.822,
+   "f1": 0.779,
+   "type_accuracy_on_matches": 0.919,
+   "iou_threshold": 0.3
+  },
+  "accuracy_by_tag": {
+   "blurry": 0.0,
+   "cable": 0.769,
+   "clutter": 0.833,
+   "dark": 0.333,
+   "floor_carpet": 0.76,
+   "floor_tile": 0.688,
+   "floor_wood": 0.684,
+   "multi": 0.5,
+   "no_hazard": 0.611,
+   "shadow": 0.4,
+   "spill": 0.818
+  },
+  "confusion": {
+   "clear->clear": 11,
+   "clear->work_order": 6,
+   "escalate->clear": 3,
+   "escalate->escalate": 21,
+   "escalate->work_order": 3,
+   "recapture->clear": 1,
+   "recapture->escalate": 2,
+   "recapture->work_order": 1,
+   "work_order->escalate": 1,
+   "work_order->work_order": 11
+  },
+  "mean_steps": 3,
+  "latency_ms": {
+   "mean": 26.8,
+   "p95": 39.4
+  },
+  "failures": [
+   {
+    "name": "scene_034.jpg",
+    "kind": "carpet:cable+clutter",
+    "tags": [
+     "multi",
+     "floor_carpet"
+    ],
+    "expected": "escalate",
+    "got": "work_order",
+    "correct": false,
+    "steps": 3,
+    "ms": 19.4,
+    "tools": [
+     "detect_hazards",
+     "create_work_order",
+     "finish"
+    ],
+    "confirmed": [
+     [
+      "clutter",
+      [
+       158,
+       280,
+       405,
+       128
+      ]
+     ]
+    ],
+    "rejected": [],
+    "gt": [
+     [
+      "cable",
+      [
+       157,
+       279,
+       408,
+       130
+      ]
+     ],
+     [
+      "clutter",
+      [
+       377,
+       287,
+       96,
+       121
+      ]
+     ]
+    ],
+    "guardrails": []
+   },
+   {
+    "name": "scene_038.jpg",
+    "kind": "wood:cable+clutter",
+    "tags": [
+     "multi",
+     "floor_wood"
+    ],
+    "expected": "escalate",
+    "got": "work_order",
+    "correct": false,
+    "steps": 3,
+    "ms": 25.8,
+    "tools": [
+     "detect_hazards",
+     "create_work_order",
+     "finish"
+    ],
+    "confirmed": [
+     [
+      "clutter",
+      [
+       292,
+       53,
+       122,
+       120
+      ]
+     ],
+     [
+      "clutter",
+      [
+       607,
+       0,
+       33,
+       86
+      ]
+     ]
+    ],
+    "rejected": [],
+    "gt": [
+     [
+      "cable",
+      [
+       607,
+       0,
+       33,
+       87
+      ]
+     ],
+     [
+      "clutter",
+      [
+       291,
+       52,
+       124,
+       122
+      ]
+     ]
+    ],
+    "guardrails": []
+   },
+   {
+    "name": "scene_039.jpg",
+    "kind": "tile:clutter+spill",
+    "tags": [
+     "multi",
+     "floor_tile"
+    ],
+    "expected": "escalate",
+    "got": "work_order",
+    "correct": false,
+    "steps": 3,
+    "ms": 17.2,
+    "tools": [
+     "detect_hazards",
+     "create_work_order",
+     "finish"
+    ],
+    "confirmed": [
+     [
+      "clutter",
+      [
+       294,
+       280,
+       85,
+       91
+      ]
+     ]
+    ],
+    "rejected": [],
+    "gt": [
+     [
+      "clutter",
+      [
+       294,
+       281,
+       85,
+       89
+      ]
+     ],
+     [
+      "spill",
+      [
+       87,
+       92,
+       162,
+       144
+      ]
+     ]
+    ],
+    "guardrails": []
+   },
+   {
+    "name": "scene_040.jpg",
+    "kind": "carpet:|shadow",
+    "tags": [
+     "shadow",
+     "no_hazard",
+     "floor_carpet"
+    ],
+    "expected": "clear",
+    "got": "work_order",
+    "correct": false,
+    "steps": 3,
+    "ms": 18.2,
+    "tools": [
+     "detect_hazards",
+     "create_work_order",
+     "finish"
+    ],
+    "confirmed": [
+     [
+      "clutter",
+      [
+       434,
+       92,
+       107,
+       178
+      ]
+     ]
+    ],
+    "rejected": [],
+    "gt": [],
+    "guardrails": []
+   },
+   {
+    "name": "scene_041.jpg",
+    "kind": "wood:|shadow",
+    "tags": [
+     "shadow",
+     "no_hazard",
+     "floor_wood"
+    ],
+    "expected": "clear",
+    "got": "work_order",
+    "correct": false,
+    "steps": 3,
+    "ms": 26.5,
+    "tools": [
+     "detect_hazards",
+     "create_work_order",
+     "finish"
+    ],
+    "confirmed": [
+     [
+      "clutter",
+      [
+       314,
+       154,
+       135,
+       122
+      ]
+     ]
+    ],
+    "rejected": [],
+    "gt": [],
+    "guardrails": []
+   },
+   {
+    "name": "scene_042.jpg",
+    "kind": "tile:|shadow",
+    "tags": [
+     "shadow",
+     "no_hazard",
+     "floor_tile"
+    ],
+    "expected": "clear",
+    "got": "work_order",
+    "correct": false,
+    "steps": 3,
+    "ms": 18.2,
+    "tools": [
+     "detect_hazards",
+     "create_work_order",
+     "finish"
+    ],
+    "confirmed": [
+     [
+      "clutter",
+      [
+       220,
+       290,
+       168,
+       124
+      ]
+     ]
+    ],
+    "rejected": [],
+    "gt": [],
+    "guardrails": []
+   },
+   {
+    "name": "scene_043.jpg",
+    "kind": "carpet:|shadow",
+    "tags": [
+     "shadow",
+     "no_hazard",
+     "floor_carpet"
+    ],
+    "expected": "clear",
+    "got": "work_order",
+    "correct": false,
+    "steps": 3,
+    "ms": 15.0,
+    "tools": [
+     "detect_hazards",
+     "create_work_order",
+     "finish"
+    ],
+    "confirmed": [
+     [
+      "clutter",
+      [
+       90,
+       302,
+       134,
+       65
+      ]
+     ]
+    ],
+    "rejected": [],
+    "gt": [],
+    "guardrails": []
+   },
+   {
+    "name": "scene_044.jpg",
+    "kind": "wood:|shadow",
+    "tags": [
+     "shadow",
+     "no_hazard",
+     "floor_wood"
+    ],
+    "expected": "clear",
+    "got": "work_order",
+    "correct": false,
+    "steps": 3,
+    "ms": 27.1,
+    "tools": [
+     "detect_hazards",
+     "create_work_order",
+     "finish"
+    ],
+    "confirmed": [
+     [
+      "clutter",
+      [
+       337,
+       216,
+       135,
+       122
+      ]
+     ]
+    ],
+    "rejected": [],
+    "gt": [],
+    "guardrails": []
+   },
+   {
+    "name": "scene_045.jpg",
+    "kind": "tile:|shadow",
+    "tags": [
+     "shadow",
+     "no_hazard",
+     "floor_tile"
+    ],
+    "expected": "clear",
+    "got": "work_order",
+    "correct": false,
+    "steps": 3,
+    "ms": 17.6,
+    "tools": [
+     "detect_hazards",
+     "create_work_order",
+     "finish"
+    ],
+    "confirmed": [
+     [
+      "clutter",
+      [
+       36,
+       225,
+       177,
+       94
+      ]
+     ]
+    ],
+    "rejected": [],
+    "gt": [],
+    "guardrails": []
+   },
+   {
+    "name": "scene_046.jpg",
+    "kind": "carpet:cable|dark",
+    "tags": [
+     "dark",
+     "cable",
+     "floor_carpet"
+    ],
+    "expected": "escalate",
+    "got": "clear",
+    "correct": false,
+    "steps": 3,
+    "ms": 27.6,
+    "tools": [
+     "detect_hazards",
+     "log_clear",
+     "finish"
+    ],
+    "confirmed": [],
+    "rejected": [],
+    "gt": [
+     [
+      "cable",
+      [
+       86,
+       0,
+       240,
+       138
+      ]
+     ]
+    ],
+    "guardrails": []
+   },
+   {
+    "name": "scene_047.jpg",
+    "kind": "wood:clutter|dark",
+    "tags": [
+     "dark",
+     "clutter",
+     "floor_wood"
+    ],
+    "expected": "work_order",
+    "got": "escalate",
+    "correct": false,
+    "steps": 3,
+    "ms": 27.1,
+    "tools": [
+     "detect_hazards",
+     "request_human_approval",
+     "finish"
+    ],
+    "confirmed": [
+     [
+      "cable",
+      [
+       379,
+       232,
+       68,
+       81
+      ]
+     ],
+     [
+      "cable",
+      [
+       448,
+       240,
+       42,
+       68
+      ]
+     ]
+    ],
+    "rejected": [],
+    "gt": [
+     [
+      "clutter",
+      [
+       365,
+       220,
+       131,
+       102
+      ]
+     ]
+    ],
+    "guardrails": []
+   },
+   {
+    "name": "scene_048.jpg",
+    "kind": "tile:spill|dark",
+    "tags": [
+     "dark",
+     "spill",
+     "floor_tile"
+    ],
+    "expected": "escalate",
+    "got": "clear",
+    "correct": false,
+    "steps": 3,
+    "ms": 25.3,
+    "tools": [
+     "detect_hazards",
+     "log_clear",
+     "finish"
+    ],
+    "confirmed": [],
+    "rejected": [],
+    "gt": [
+     [
+      "spill",
+      [
+       174,
+       234,
+       155,
+       117
+      ]
+     ]
+    ],
+    "guardrails": []
+   },
+   {
+    "name": "scene_050.jpg",
+    "kind": "wood:cable|dark",
+    "tags": [
+     "dark",
+     "cable",
+     "floor_wood"
+    ],
+    "expected": "escalate",
+    "got": "clear",
+    "correct": false,
+    "steps": 3,
+    "ms": 25.9,
+    "tools": [
+     "detect_hazards",
+     "log_clear",
+     "finish"
+    ],
+    "confirmed": [],
+    "rejected": [],
+    "gt": [
+     [
+      "cable",
+      [
+       0,
+       0,
+       141,
+       345
+      ]
+     ]
+    ],
+    "guardrails": []
+   },
+   {
+    "name": "scene_052.jpg",
+    "kind": "carpet:cable|blurry",
+    "tags": [
+     "blurry",
+     "cable",
+     "floor_carpet"
+    ],
+    "expected": "recapture",
+    "got": "escalate",
+    "correct": false,
+    "steps": 3,
+    "ms": 13.7,
+    "tools": [
+     "detect_hazards",
+     "request_human_approval",
+     "finish"
+    ],
+    "confirmed": [
+     [
+      "cable",
+      [
+       179,
+       291,
+       267,
+       34
+      ]
+     ]
+    ],
+    "rejected": [],
+    "gt": [
+     [
+      "cable",
+      [
+       171,
+       290,
+       283,
+       39
+      ]
+     ]
+    ],
+    "guardrails": []
+   },
+   {
+    "name": "scene_053.jpg",
+    "kind": "wood:|blurry",
+    "tags": [
+     "blurry",
+     "no_hazard",
+     "floor_wood"
+    ],
+    "expected": "recapture",
+    "got": "clear",
+    "correct": false,
+    "steps": 3,
+    "ms": 24.4,
+    "tools": [
+     "detect_hazards",
+     "log_clear",
+     "finish"
+    ],
+    "confirmed": [],
+    "rejected": [],
+    "gt": [],
+    "guardrails": []
+   },
+   {
+    "name": "scene_054.jpg",
+    "kind": "tile:clutter|blurry",
+    "tags": [
+     "blurry",
+     "clutter",
+     "floor_tile"
+    ],
+    "expected": "recapture",
+    "got": "work_order",
+    "correct": false,
+    "steps": 3,
+    "ms": 25.5,
+    "tools": [
+     "detect_hazards",
+     "create_work_order",
+     "finish"
+    ],
+    "confirmed": [
+     [
+      "clutter",
+      [
+       64,
+       230,
+       146,
+       146
+      ]
+     ]
+    ],
+    "rejected": [],
+    "gt": [
+     [
+      "clutter",
+      [
+       67,
+       233,
+       141,
+       141
+      ]
+     ]
+    ],
+    "guardrails": []
+   },
+   {
+    "name": "scene_055.jpg",
+    "kind": "carpet:spill|blurry",
+    "tags": [
+     "blurry",
+     "spill",
+     "floor_carpet"
+    ],
+    "expected": "recapture",
+    "got": "escalate",
+    "correct": false,
+    "steps": 3,
+    "ms": 13.8,
+    "tools": [
+     "detect_hazards",
+     "request_human_approval",
+     "finish"
+    ],
+    "confirmed": [
+     [
+      "spill",
+      [
+       255,
+       130,
+       109,
+       104
+      ]
+     ]
+    ],
+    "rejected": [],
+    "gt": [
+     [
+      "spill",
+      [
+       247,
+       123,
+       124,
+       118
+      ]
+     ]
+    ],
+    "guardrails": []
+   }
+  ]
+ },
+ {
+  "config": "agentic",
+  "n_images": 60,
+  "outcome_accuracy": 0.933,
+  "escalation_recall": 0.852,
+  "unsafe_misses": [
+   "scene_034.jpg",
+   "scene_038.jpg",
+   "scene_046.jpg",
+   "scene_048.jpg"
+  ],
+  "false_escalation_rate": 0.0,
+  "recapture_recall": 1.0,
+  "unneeded_recaptures": [],
+  "detection": {
+   "tp": 39,
+   "fp": 4,
+   "fn": 6,
+   "precision": 0.907,
+   "recall": 0.867,
+   "f1": 0.886,
+   "type_accuracy_on_matches": 0.949,
+   "iou_threshold": 0.3
+  },
+  "accuracy_by_tag": {
+   "blurry": 1.0,
+   "cable": 0.923,
+   "clutter": 1.0,
+   "dark": 0.667,
+   "floor_carpet": 0.92,
+   "floor_tile": 0.938,
+   "floor_wood": 0.947,
+   "multi": 0.667,
+   "no_hazard": 1.0,
+   "shadow": 1.0,
+   "spill": 0.909
+  },
+  "confusion": {
+   "clear->clear": 17,
+   "escalate->clear": 2,
+   "escalate->escalate": 23,
+   "escalate->work_order": 2,
+   "recapture->recapture": 4,
+   "work_order->work_order": 12
+  },
+  "mean_steps": 5.1,
+  "latency_ms": {
+   "mean": 71.9,
+   "p95": 360.4
+  },
+  "failures": [
+   {
+    "name": "scene_034.jpg",
+    "kind": "carpet:cable+clutter",
+    "tags": [
+     "multi",
+     "floor_carpet"
+    ],
+    "expected": "escalate",
+    "got": "work_order",
+    "correct": false,
+    "steps": 5,
+    "ms": 36.7,
+    "tools": [
+     "assess_image_quality",
+     "detect_hazards",
+     "inspect_region",
+     "create_work_order",
+     "finish"
+    ],
+    "confirmed": [
+     [
+      "clutter",
+      [
+       158,
+       280,
+       405,
+       128
+      ]
+     ]
+    ],
+    "rejected": [],
+    "gt": [
+     [
+      "cable",
+      [
+       157,
+       279,
+       408,
+       130
+      ]
+     ],
+     [
+      "clutter",
+      [
+       377,
+       287,
+       96,
+       121
+      ]
+     ]
+    ],
+    "guardrails": []
+   },
+   {
+    "name": "scene_038.jpg",
+    "kind": "wood:cable+clutter",
+    "tags": [
+     "multi",
+     "floor_wood"
+    ],
+    "expected": "escalate",
+    "got": "work_order",
+    "correct": false,
+    "steps": 6,
+    "ms": 82.4,
+    "tools": [
+     "assess_image_quality",
+     "detect_hazards",
+     "inspect_region",
+     "inspect_region",
+     "create_work_order",
+     "finish"
+    ],
+    "confirmed": [
+     [
+      "clutter",
+      [
+       292,
+       53,
+       122,
+       120
+      ]
+     ],
+     [
+      "clutter",
+      [
+       607,
+       0,
+       33,
+       86
+      ]
+     ]
+    ],
+    "rejected": [],
+    "gt": [
+     [
+      "cable",
+      [
+       607,
+       0,
+       33,
+       87
+      ]
+     ],
+     [
+      "clutter",
+      [
+       291,
+       52,
+       124,
+       122
+      ]
+     ]
+    ],
+    "guardrails": []
+   },
+   {
+    "name": "scene_046.jpg",
+    "kind": "carpet:cable|dark",
+    "tags": [
+     "dark",
+     "cable",
+     "floor_carpet"
+    ],
+    "expected": "escalate",
+    "got": "clear",
+    "correct": false,
+    "steps": 7,
+    "ms": 326.1,
+    "tools": [
+     "assess_image_quality",
+     "enhance_image",
+     "detect_hazards",
+     "detect_hazards",
+     "inspect_region",
+     "log_clear",
+     "finish"
+    ],
+    "confirmed": [],
+    "rejected": [
+     [
+      "cable",
+      "shadow_like"
+     ]
+    ],
+    "gt": [
+     [
+      "cable",
+      [
+       86,
+       0,
+       240,
+       138
+      ]
+     ]
+    ],
+    "guardrails": []
+   },
+   {
+    "name": "scene_048.jpg",
+    "kind": "tile:spill|dark",
+    "tags": [
+     "dark",
+     "spill",
+     "floor_tile"
+    ],
+    "expected": "escalate",
+    "got": "clear",
+    "correct": false,
+    "steps": 6,
+    "ms": 375.9,
+    "tools": [
+     "assess_image_quality",
+     "enhance_image",
+     "detect_hazards",
+     "detect_hazards",
+     "log_clear",
+     "finish"
+    ],
+    "confirmed": [],
+    "rejected": [],
+    "gt": [
+     [
+      "spill",
+      [
+       174,
+       234,
+       155,
+       117
+      ]
+     ]
+    ],
+    "guardrails": []
+   }
+  ]
+ }
+]

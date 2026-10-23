@@ -1,0 +1,7 @@
+opencv-python-headless==5.0.0.93
+numpy==2.5.4
+fastapi==0.161.1
+uvicorn==0.54.0
+python-multipart==0.0.32
+anthropic[bedrock]==2.2.0
+boto3==1.43.118
