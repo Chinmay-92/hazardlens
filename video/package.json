@@ -1,0 +1,6 @@
+{
+  "name": "hazardlens-video",
+  "private": true,
+  "description": "Scripts that render the HazardLens demo video",
+  "dependencies": { "playwright": "1.62.0" }
+}

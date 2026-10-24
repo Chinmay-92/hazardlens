@@ -1,0 +1,80 @@
+[
+ {
+  "id": "01_title",
+  "kind": "slide",
+  "shows": "Title card",
+  "text": "This is HazardLens: an OpenCV 5 agent that finds trip and slip hazards, checks its own evidence, and asks a person before raising an alert. I built it for the OpenCV AI Competition 2026."
+ },
+ {
+  "id": "02_problem",
+  "kind": "app",
+  "shows": "App home page and demo scenes",
+  "text": "Falls are one of the main ways older people get hurt, and many indoor falls start with something on the floor: a trailing cable, a bag in a corridor, a spilled drink. Care homes check walkways by hand, and the checks are rarely recorded. A phone can see a cable. The hard part is deciding whether to trust the photo, whether a dark patch is just a shadow, and whether to interrupt a busy nurse."
+ },
+ {
+  "id": "03_upload_spill",
+  "kind": "app",
+  "shows": "Upload a photo, spill detected, zoom verification, approval requested",
+  "text": "Let me upload a photo of a carpeted corridor, add the location, and press Inspect. The agent first checks exposure, sharpness and glare. The photo is fine, so it runs detection and finds a spill candidate. Instead of acting straight away, it calls inspect region. It zooms in two times, compares the patch with a ring of nearby floor, and confirms the spill. Spills are high severity, so the agent requests human approval. Nothing has been sent yet."
+ },
+ {
+  "id": "04_shadow",
+  "kind": "app",
+  "shows": "Shadow scene: candidate rejected after zoom, logged clear",
+  "text": "Now a scene with a soft shadow. Detection finds a candidate that a single-shot pipeline would turn into a work order. The agent zooms in, sees that the hue is unchanged and the edges are soft, and rejects it as a shadow. The walkway is logged as clear."
+ },
+ {
+  "id": "05_dark_cable",
+  "kind": "app",
+  "shows": "Dark scene: enhance, re-detect at full sensitivity, cable confirmed, approval requested",
+  "text": "This photo is too dark. The quality gate says enhance, so the agent runs denoising, gamma and CLAHE, and finds a cable candidate. Because the image was enhanced, it then re-runs detection at maximum sensitivity, to catch anything the noise hid. That is an OpenCV output choosing the next tool. Nothing new turns up, so it confirms the cable with a zoomed inspection and queues it for approval."
+ },
+ {
+  "id": "06_blurry",
+  "kind": "app",
+  "shows": "Blurry scene: retake requested",
+  "text": "This one is blurry. The Laplacian sharpness score is far below the threshold, and enhancement cannot fix blur, so the agent refuses to guess. It asks for a retake, and makes no decision on pixels it cannot trust."
+ },
+ {
+  "id": "07_clutter",
+  "kind": "app",
+  "shows": "Clutter scene: routine work order",
+  "text": "Clutter, like a bag or a box left in a corridor, is medium severity. The agent confirms it and files a routine work order by itself. Nobody gets interrupted for this."
+ },
+ {
+  "id": "08_approve",
+  "kind": "app",
+  "shows": "Human approval queue: approve the cable alert",
+  "text": "Urgent alerts are different. Here is the approval queue. As the duty manager, I review the cable alert and approve it. Only now is the alert sent to on-shift staff. Running locally it is just logged; in the cloud deployment it goes out through Amazon SNS, and approving needs a token kept in Secrets Manager."
+ },
+ {
+  "id": "09_architecture",
+  "kind": "slide",
+  "shows": "System architecture diagram",
+  "text": "Under the hood, a FastAPI app runs on ECS Fargate on Graviton, behind a load balancer, deployed with AWS CDK. The agent executor owns the state, the budgets and the guardrails. The planner is either a deterministic rule policy or Claude through tool use. If the LLM fails, the rule policy takes over from the current state. Decision traces go to S3 without images, and CloudWatch counts escalations and guardrail interventions."
+ },
+ {
+  "id": "10_workflow",
+  "kind": "slide",
+  "shows": "Agent workflow diagram",
+  "text": "Here is the agent loop. Every branch depends on an OpenCV 5 output: the quality verdict, whether the image was enhanced, whether glare was seen, and the zoomed inspection result. The agent can only request urgent alerts. Three guardrails make sure every high-severity hazard reaches a human, and that it never logs clear while a confirmed hazard exists."
+ },
+ {
+  "id": "11_results",
+  "kind": "slide",
+  "shows": "Evaluation results: agent vs single-shot OpenCV",
+  "text": "On sixty synthetic scenes, the agent chooses the correct final action ninety-five percent of the time, against seventy-three percent for single-shot OpenCV. On a held-out set it is ninety-three versus seventy-two. It handles every shadow distractor, sends every blurry photo back for a retake, and makes no false escalations. The cost is about five tool calls and sixty milliseconds per photo on a laptop CPU."
+ },
+ {
+  "id": "12_failures",
+  "kind": "slide",
+  "shows": "Failure cases",
+  "text": "And here is where it fails. All three misses are on tile: clear liquid on light tiles, a spill touching a box that is reported only as clutter, and a spill in a dark photo. Escalation recall is eighty-nine percent, so three urgent hazards were missed. I publish these cases, and they are why a person still does the walk."
+ },
+ {
+  "id": "13_close",
+  "kind": "slide",
+  "shows": "Closing card",
+  "text": "HazardLens assists people; it does not replace them. Photos are analysed in memory and never stored, and no one is alerted without human approval. Next step: a consented pilot with a care provider. Thanks for watching."
+ }
+]

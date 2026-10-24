@@ -7,3 +7,13 @@ eval/heldout/images/
 infra/cdk.out/
 node_modules/
 .DS_Store
+
+# demo video outputs (scripts + narration are tracked)
+video/*.mp4
+video/*.webm
+video/*.aiff
+video/*.wav
+video/frames/
+video/audio/
+video/build/
+video/slides/
