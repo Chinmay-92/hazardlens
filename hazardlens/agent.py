@@ -321,7 +321,13 @@ def summarise(s: RunState) -> str:
         extra = f" {len(rej)} candidate(s) were checked and dismissed (e.g. shadows)." if rej else ""
         return "Walkway looks clear." + extra
     parts = ", ".join(f"{d['type']} ({d['severity']})" for d in c)
-    return f"Found {len(c)} hazard(s): {parts}. High-severity items are waiting for human approval."
+    kinds = {a["kind"] for a in s.actions}
+    msg = f"Found {len(c)} hazard(s): {parts}."
+    if "approval" in kinds:
+        msg += " High-severity items are waiting for human approval."
+    if "work_order" in kinds:
+        msg += " A routine work order was created."
+    return msg
 
 
 SYSTEM_PROMPT = """You are HazardLens, a trip-and-slip hazard inspection agent for care homes and \

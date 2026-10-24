@@ -9,7 +9,7 @@ from fastapi.testclient import TestClient
 
 from hazardlens import vision as V
 from hazardlens.actions import ActionStore
-from hazardlens.agent import LLMPlanner, RulePlanner, RunState, Toolbox, run_inspection
+from hazardlens.agent import LLMPlanner, RulePlanner, RunState, Toolbox, run_inspection, summarise
 from hazardlens.synth import make_scene
 
 
@@ -229,3 +229,37 @@ def test_api_rejects_bad_input(client):
     assert r.status_code == 415
     assert c.post("/api/inspect_sample/../../etc/passwd").status_code == 404
     assert c.post("/api/inspect_sample/scene_043.jpg?planner=rule").json()["outcome"] == "clear"
+
+
+# ------------------------------------------------------------------ summary text
+
+def _state_with(dets, actions):
+    img = np.zeros((8, 8, 3), np.uint8)
+    s = RunState(run_id="t", original=img, working=img)
+    s.detections = {d["id"]: d for d in dets}
+    s.actions = actions
+    return s
+
+
+def test_summary_clutter_only_mentions_work_order_not_approval():
+    s = _state_with([{"id": "h1", "type": "clutter", "severity": "medium", "status": "confirmed"}],
+                    [{"kind": "work_order", "id": "WO-1", "hazard_ids": ["h1"]}])
+    text = summarise(s)
+    assert "routine work order" in text
+    assert "human approval" not in text
+
+
+def test_summary_high_severity_mentions_pending_approval():
+    s = _state_with([{"id": "h1", "type": "cable", "severity": "high", "status": "confirmed"}],
+                    [{"kind": "approval", "id": "AP-1", "hazard_ids": ["h1"]}])
+    text = summarise(s)
+    assert "waiting for human approval" in text
+    assert "work order" not in text
+
+
+def test_clutter_scene_end_to_end_summary(store):
+    img, _ = scene("carpet:clutter")
+    r = run_inspection(img, store=store, planner="rule")
+    assert r.outcome == "work_order"
+    assert "human approval" not in r.summary
+    assert "routine work order" in r.summary
